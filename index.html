@@ -9,21 +9,24 @@
   <div class="container-fluid text-center">
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
-        <h1 class="display-3">Exercice 1 - Partie 2 - JQuery</h1>
-        <p class="lead">Affichage d'une alerte</p>
+        <h1 class="display-3">Exercice 1 - JQuery</h1>
+        <h3>Partie 3</h3>
+        <p class="lead">Compter le nombre de click</p>
       </div>
     </div>
-    <form>
-      <button type="button" name="button" id="clickMe" >Clique-moi !</button>
-    </form>
+    <p id="nbr">0</p>
+    <button type="button" name="button" id="plus">+1</button>
+
   </div>
   <script src="assets\js\jquery-3.3.1.min.js"></script>
   <script>
-    // Fonction lancant une alert au click du bouton
+    // Fonction qui incrémente un text à chaque clique
     $(document).ready(function(){
-      $("#clickMe").click(function(){
-        alert("Tu m'as cliqué dessus !");
-      });
+      var cpt = 0;
+      $("#plus").click(function() {
+          // On affiche la valeur du compteur sur le <p>
+          $("#nbr").text(++cpt);
+        })
     });
   </script>
 </body>
