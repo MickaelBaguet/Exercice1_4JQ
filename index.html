@@ -10,23 +10,123 @@
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-3">Exercice 1 - JQuery</h1>
-        <h3>Partie 3</h3>
-        <p class="lead">Compter le nombre de click</p>
+        <h3>Partie 4</h3>
+        <p class="lead">Jan ! Ken ! Pon !</p>
+        <span>(Pierre ! Feuille ! Ciseaux !)</span>
       </div>
     </div>
-    <p id="nbr">0</p>
-    <button type="button" name="button" id="plus">+1</button>
+    <div id="res"class="mb-4"></div>
+    <div class="d-flex justify-content-around mb-3">
+      <span>
+        <span>Victoire(s) : </span><span id="win">0</span>
+      </span>
+      <span>
+        <span>Défaites(s) : </span><span id="lose">0</span>
+      </span>
+      <span>
+        <span>Win rate : </span><span id="rate"></span><span> %</span>
+      </span>
+    </div>
+    <form class="" action="index.html" method="post">
+      <select class="" name="">
+        <option value="jan">JAN !</option>
+        <option value="ken">KEN !</option>
+        <option value="pon">PON !</option>
+      </select>
+    </form>
+    <button id="test" type="button" name="button" class="btn btn-secondary mt-3">Est-ce votre ultime bafouille ?</button>
 
   </div>
   <script src="assets\js\jquery-3.3.1.min.js"></script>
   <script>
-    // Fonction qui incrémente un text à chaque clique
     $(document).ready(function(){
-      var cpt = 0;
-      $("#plus").click(function() {
-          // On affiche la valeur du compteur sur le <p>
-          $("#nbr").text(++cpt);
-        })
+      var nbGame = 0;
+      var win = 0;
+      var lose = 0;
+
+      $("#test").click(function() {
+        var rate = ((win/nbGame)*100).toFixed(2);
+        var choixPerso = $("select").val();
+        // 1 = pierre, 2 = feuille, 3 = ciseau
+        var choixBot = Math.floor(Math.random() * 3) + 1;
+        console.log(choixPerso);
+        console.log(choixBot);
+        switch (choixPerso) {
+          case "jan":
+            switch (choixBot) {
+              case 1:
+                console.log("Égalité !");
+                // nbGame++;
+                // $("#rate").text(rate);
+                $("#res").text("Pierre vs Pierre");
+              break;
+              case 2:
+                console.log("Perdu !");
+                lose++;
+                nbGame++;
+                $("#lose").text(lose);
+                $("#rate").text(rate);
+                $("#res").text("Pierre vs Feuille");
+              break;
+              case 3:
+                console.log("Gagné !");
+                win++;
+                nbGame++;
+                $("#win").text(win);
+                $("#rate").text(rate);
+                $("#res").text("Pierre vs Ciseaux");
+              break;
+            }
+          break;
+          case "ken":
+            switch (choixBot) {
+              case 1:
+                console.log("Gagné !");
+                win++;
+                nbGame++;
+                $("#win").text(win);
+                $("#rate").text(rate);
+                $("#res").text("Feuille vs Pierre");
+              break;
+              case 2:
+                console.log("Égalité");
+                // nbGame++;
+                // $("#rate").text(rate);
+              break;
+              case 3:
+                console.log("Perdu !");
+                lose++;
+                nbGame++;
+                $("#lose").text(lose);
+                $("#rate").text(rate);
+              break;
+            }
+          break;
+          case "pon":
+            switch (choixBot) {
+              case 1:
+                console.log("Perdu !");
+                lose++;
+                nbGame++;
+                $("#lose").text(lose);
+                $("#rate").text(rate);
+              break;
+              case 2:
+                console.log("Gagné !");
+                win++;
+                nbGame++;
+                $("#win").text(win);
+                $("#rate").text(rate);
+              break;
+              case 3:
+                console.log("Égalité !");
+                // nbGame++;
+                // $("#rate").text(rate);
+              break;
+            }
+          break;
+        }
+      });
     });
   </script>
 </body>
