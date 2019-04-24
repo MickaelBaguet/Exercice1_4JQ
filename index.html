@@ -16,6 +16,7 @@
       </div>
     </div>
     <div id="res"class="mb-4"></div>
+    <!-- Affichage des scores et du win rate -->
     <div class="d-flex justify-content-around mb-3">
       <span>
         <span>Victoire(s) : </span><span id="win">0</span>
@@ -27,6 +28,7 @@
         <span>Win rate : </span><span id="rate"></span><span> %</span>
       </span>
     </div>
+    <!-- Formualaire des choix du chifoumi -->
     <form class="" action="index.html" method="post">
       <select class="" name="">
         <option value="jan">JAN !</option>
@@ -40,91 +42,87 @@
   <script src="assets\js\jquery-3.3.1.min.js"></script>
   <script>
     $(document).ready(function(){
+      // Initialisation des valeurs
       var nbGame = 0;
       var win = 0;
       var lose = 0;
 
       $("#test").click(function() {
-        var rate = ((win/nbGame)*100).toFixed(2);
         var choixPerso = $("select").val();
+        // Random pour le choix du bot
         // 1 = pierre, 2 = feuille, 3 = ciseau
         var choixBot = Math.floor(Math.random() * 3) + 1;
-        console.log(choixPerso);
-        console.log(choixBot);
+        // console.log(choixPerso);
+        // console.log(choixBot);
         switch (choixPerso) {
+          // Dans le cas ou j'ai choisi Pierre
           case "jan":
+            // Dans le cas ou le bot choisi ...
             switch (choixBot) {
-              case 1:
+              case 1: //Pierre
                 console.log("Égalité !");
-                // nbGame++;
-                // $("#rate").text(rate);
                 $("#res").text("Pierre vs Pierre");
               break;
-              case 2:
+              case 2: //Feuille
                 console.log("Perdu !");
-                lose++;
-                nbGame++;
-                $("#lose").text(lose);
-                $("#rate").text(rate);
+                $("#lose").text(++lose);
                 $("#res").text("Pierre vs Feuille");
               break;
-              case 3:
+              case 3: //Ciseaux
                 console.log("Gagné !");
-                win++;
-                nbGame++;
-                $("#win").text(win);
-                $("#rate").text(rate);
+                $("#win").text(++win);
                 $("#res").text("Pierre vs Ciseaux");
               break;
             }
           break;
+          // Dans le cas ou j'ai choisi Feuille
           case "ken":
+            // Dans le cas ou le bot choisi ...
             switch (choixBot) {
-              case 1:
-                console.log("Gagné !");
-                win++;
-                nbGame++;
-                $("#win").text(win);
-                $("#rate").text(rate);
+              case 1: //Pierre
+              console.log("Gagné !");
+                $("#win").text(++win);
+                $("#res").text("Pierre vs Ciseaux");
                 $("#res").text("Feuille vs Pierre");
               break;
-              case 2:
+              case 2: //Feuille
                 console.log("Égalité");
-                // nbGame++;
-                // $("#rate").text(rate);
+                $("#res").text("Feuille vs Feuille");
               break;
-              case 3:
+              case 3: //Ciseaux
                 console.log("Perdu !");
-                lose++;
-                nbGame++;
-                $("#lose").text(lose);
-                $("#rate").text(rate);
+                $("#lose").text(++lose);
+                $("#res").text("Feuille vs Ciseaux");
               break;
             }
           break;
+          // Dans le cas ou j'ai choisi Ciseaux
           case "pon":
+            // Dans le cas ou le bot choisi ...
             switch (choixBot) {
-              case 1:
+              case 1: //Pierre
                 console.log("Perdu !");
-                lose++;
-                nbGame++;
-                $("#lose").text(lose);
-                $("#rate").text(rate);
+                $("#lose").text(++lose);
+                $("#res").text("Ciseaux vs Pierre");
               break;
-              case 2:
+              case 2: //Feuille
                 console.log("Gagné !");
-                win++;
-                nbGame++;
-                $("#win").text(win);
-                $("#rate").text(rate);
+                $("#win").text(++win);
+                $("#res").text("Pierre vs Ciseaux");
+                $("#res").text("Ciseaux vs Feuille");
               break;
-              case 3:
+              case 3: //Ciseaux
                 console.log("Égalité !");
-                // nbGame++;
-                // $("#rate").text(rate);
+                $("#res").text("Ciseaux vs Ciseaux");
               break;
             }
           break;
+        }
+        // On recalcule le win rate à la fin de chaque boucle (afin d'éviter un décalage) puis on l'affiche
+        // Affichage du win rate seulement s'il y a des win ou lose (afin d'éviter le NaN)
+        if (win != 0 || lose != 0) {
+          rate = ((win/(win+lose))*100).toFixed(2);
+          $("#rate").text(rate);
         }
       });
     });
