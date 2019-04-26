@@ -58,17 +58,20 @@
       var win = 0;
       var lose = 0;
 
+      // Fonction utilisée si on clique sur l'image
+      // Récupère l'alt de l'image (même valeur que sur l'option) puis appel la fonction avec le choix en paramètre
       $('.img').click(function(){
         var choix = $(this).attr("alt");
-        match(choix);
+        versus(choix);
       });
-
+      // Fonction utilisée si on passe par le menu déroulant
+      // Récupère la valeur du select (même valeur que l'alt de l'image) puis appel la fonction avec le choix en paramètre
       $("#test").click(function() {
         var choixPerso = $("select").val();
-        match(choixPerso);
+        versus(choixPerso);
       });
-
-      function match (choixPerso){
+      // Fonction effectuant le choix du bot et compare les deux choix
+      function versus (choixPerso){
         //  Random pour le choix du bot
         // 1 = pierre, 2 = feuille, 3 = ciseau
         var choixBot = Math.floor(Math.random() * 3) + 1;
