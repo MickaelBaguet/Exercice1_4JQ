@@ -1,0 +1,12 @@
+.img
+{
+  /* position: absolute; */
+  height: 100px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.jumbotron
+{
+  padding: 2em;
+}

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
   <title>Exercice 1</title>
 </head>
 <body>
@@ -28,8 +29,13 @@
         <span>Win rate : </span><span id="rate"></span><span> %</span>
       </span>
     </div>
+    <div class="d-flex justify-content-around">
+      <img class="img" onkeypress=""src="img/pierre.png" alt="jan">
+      <img class="img" src="img/feuille.png" alt="ken">
+      <img class="img" src="img/ciseaux.png" alt="pon">
+    </div>
     <!-- Formualaire des choix du chifoumi -->
-    <form class="" action="index.html" method="post">
+    <form class="mt-2" action="index.html" method="post">
       <select class="" name="">
         <option value="jan">JAN !</option>
         <option value="ken">KEN !</option>
@@ -39,17 +45,31 @@
     <button id="test" type="button" name="button" class="btn btn-secondary mt-3">Est-ce votre ultime bafouille ?</button>
 
   </div>
+
   <script src="assets\js\jquery-3.3.1.min.js"></script>
   <script>
     $(document).ready(function(){
+
+      // $("#pierre").animate({left: "+=500"}, 2000);
+      // $("#pierre").animate({left: "-=300"}, 1000);
+
       // Initialisation des valeurs
       var nbGame = 0;
       var win = 0;
       var lose = 0;
 
+      $('.img').click(function(){
+        var choix = $(this).attr("alt");
+        match(choix);
+      });
+
       $("#test").click(function() {
         var choixPerso = $("select").val();
-        // Random pour le choix du bot
+        match(choixPerso);
+      });
+
+      function match (choixPerso){
+        //  Random pour le choix du bot
         // 1 = pierre, 2 = feuille, 3 = ciseau
         var choixBot = Math.floor(Math.random() * 3) + 1;
         // console.log(choixPerso);
@@ -124,7 +144,7 @@
           rate = ((win/(win+lose))*100).toFixed(2);
           $("#rate").text(rate);
         }
-      });
+      }
     });
   </script>
 </body>
