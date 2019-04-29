@@ -73,9 +73,10 @@
         //  Random pour le choix du bot
         // 0 = pierre, 1 = feuille, 2 = ciseau
         var choixBot = Math.floor(Math.random() * 3);
+        // Tableau contenant le nom correspondant au choix du bot
         var choixBotName = ["pierre", "feuille", "ciseaux"];
-        console.log(choixPerso);
-        console.log(choixBotName[choixBot]);
+        // console.log(choixPerso);
+        // console.log(choixBotName[choixBot]);
 
         // switch (choixPerso) {
         //   // Dans le cas ou j'ai choisi Pierre
@@ -131,14 +132,16 @@
         //   break;
         // }
         // Si on gagne
+        // If testant le choix du joueur contre celui du bot
+        // Si on est dans un cas ou l'on gagne
         if ( (choixPerso == "pierre" && choixBotName[choixBot] =="ciseaux") || (choixPerso == "feuille" && choixBotName[choixBot] =="pierre") || (choixPerso == "ciseaux" && choixBotName[choixBot] =="feuille"))
         {
           console.log("Gagné !");
           $("#win").text(++win);
-          // Si les valeurs sont égales
+          // Si les valeurs sont égales (donc égalité)
         } else if (choixPerso == choixBotName[choixBot]) {
           console.log("Égalité !");
-          // Sinon on a perdu
+          // Si ce n'est aucun des deux (victoire ou égalité) c'est que l'on a perdu
         } else {
           console.log("Perdu !");
           $("#lose").text(++lose);
@@ -149,19 +152,27 @@
         // Affiche en mode texte
         $("#res").text(choixPerso+" vs "+choixBotName[choixBot]);
         // Affichage en mode image
+        // On fait un remove à chaque fois pour 'nettoyer' les classes ajout (correspondant aux images)
+        // Cela évite le cumul d'image en cas de lancement successif
         $('.ajout').remove();
+        // On ajoute avant l'id de resultat (before) des balises images correspondant  ...
+        // ... aux choix du joueur et du bot.
+        // Joueur: On utilise le nom du choix (pierre, feuille, ciseaux) concaténé avec un .png ...
+        // ... pour chargé la bonne image à chaque fois.
+        // Bot: on utilise le numéro du choix du bot (0, 1, 2) comme indice pour prendre le nom ...
+        // ... concaténé à un .png pour chargé la bonne image du bot.
         $('#res').before('<img id="'+choixPerso+'P" class="ajout moi" src="img/'+choixPerso+'.png" />');
         $('#res').before('<img id="'+choixBotName[choixBot]+'B" class="ajout bot" src="img/'+choixBotName[choixBot]+'.png" />');
-
+        // Utilisation d'un animate pour faire bouger les images
+        // L'image joueur (positionnée hors de l'écran à gauche grâce au CSS) vas se translater vers...
+        // ... la gauche de 600px en 2 secondes puis disparaitre progressivement (fadeOut) en 1s puis se supprime.
         $('.moi').animate({left: "+=600"}, 2000, function(){
           $('.moi').fadeOut(1000, function(){$(this).remove()})
         });
-
+        // Idem pour le bot (image hors écran à droite) mais se translate vers la gauche.
         $('.bot').animate({right: "+=600"}, 2000, function(){
           $('.bot').fadeOut(1000, function(){$(this).remove()})
         });
-
-        // $('.bot').animate({right: "+=600"}, 2000);
 
         // On recalcule le win rate à la fin de chaque boucle (afin d'éviter un décalage) puis on l'affiche
         // Affichage du win rate seulement s'il y a des win ou lose (afin d'éviter le NaN)
