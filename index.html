@@ -30,16 +30,16 @@
       </span>
     </div>
     <div class="d-flex justify-content-around">
-      <img class="img" onkeypress=""src="img/pierre.png" alt="jan">
-      <img class="img" src="img/feuille.png" alt="ken">
-      <img class="img" src="img/ciseaux.png" alt="pon">
+      <img class="img" onkeypress=""src="img/pierre.png" alt="pierre">
+      <img class="img" src="img/feuille.png" alt="feuille">
+      <img class="img" src="img/ciseaux.png" alt="ciseaux">
     </div>
     <!-- Formualaire des choix du chifoumi -->
     <form class="mt-2" action="index.html" method="post">
       <select class="" name="">
-        <option value="jan">JAN !</option>
-        <option value="ken">KEN !</option>
-        <option value="pon">PON !</option>
+        <option value="pierre">JAN !</option>
+        <option value="feuille">KEN !</option>
+        <option value="ciseaux">PON !</option>
       </select>
     </form>
     <button id="test" type="button" name="button" class="btn btn-secondary mt-3">Est-ce votre ultime bafouille ?</button>
@@ -49,9 +49,6 @@
   <script src="assets\js\jquery-3.3.1.min.js"></script>
   <script>
     $(document).ready(function(){
-
-      // $("#pierre").animate({left: "+=500"}, 2000);
-      // $("#pierre").animate({left: "-=300"}, 1000);
 
       // Initialisation des valeurs
       var nbGame = 0;
@@ -72,75 +69,100 @@
       });
       // Fonction effectuant le choix du bot et compare les deux choix
       function versus (choixPerso){
+
         //  Random pour le choix du bot
-        // 1 = pierre, 2 = feuille, 3 = ciseau
-        var choixBot = Math.floor(Math.random() * 3) + 1;
-        // console.log(choixPerso);
-        // console.log(choixBot);
-        switch (choixPerso) {
-          // Dans le cas ou j'ai choisi Pierre
-          case "jan":
-            // Dans le cas ou le bot choisi ...
-            switch (choixBot) {
-              case 1: //Pierre
-                console.log("Égalité !");
-                $("#res").text("Pierre vs Pierre");
-              break;
-              case 2: //Feuille
-                console.log("Perdu !");
-                $("#lose").text(++lose);
-                $("#res").text("Pierre vs Feuille");
-              break;
-              case 3: //Ciseaux
-                console.log("Gagné !");
-                $("#win").text(++win);
-                $("#res").text("Pierre vs Ciseaux");
-              break;
-            }
-          break;
-          // Dans le cas ou j'ai choisi Feuille
-          case "ken":
-            // Dans le cas ou le bot choisi ...
-            switch (choixBot) {
-              case 1: //Pierre
-              console.log("Gagné !");
-                $("#win").text(++win);
-                $("#res").text("Pierre vs Ciseaux");
-                $("#res").text("Feuille vs Pierre");
-              break;
-              case 2: //Feuille
-                console.log("Égalité");
-                $("#res").text("Feuille vs Feuille");
-              break;
-              case 3: //Ciseaux
-                console.log("Perdu !");
-                $("#lose").text(++lose);
-                $("#res").text("Feuille vs Ciseaux");
-              break;
-            }
-          break;
-          // Dans le cas ou j'ai choisi Ciseaux
-          case "pon":
-            // Dans le cas ou le bot choisi ...
-            switch (choixBot) {
-              case 1: //Pierre
-                console.log("Perdu !");
-                $("#lose").text(++lose);
-                $("#res").text("Ciseaux vs Pierre");
-              break;
-              case 2: //Feuille
-                console.log("Gagné !");
-                $("#win").text(++win);
-                $("#res").text("Pierre vs Ciseaux");
-                $("#res").text("Ciseaux vs Feuille");
-              break;
-              case 3: //Ciseaux
-                console.log("Égalité !");
-                $("#res").text("Ciseaux vs Ciseaux");
-              break;
-            }
-          break;
+        // 0 = pierre, 1 = feuille, 2 = ciseau
+        var choixBot = Math.floor(Math.random() * 3);
+        var choixBotName = ["pierre", "feuille", "ciseaux"];
+        console.log(choixPerso);
+        console.log(choixBotName[choixBot]);
+
+        // switch (choixPerso) {
+        //   // Dans le cas ou j'ai choisi Pierre
+        //   case "pierre":
+        //     // Dans le cas ou le bot choisi ...
+        //     switch (choixBot) {
+        //       case 0: //Pierre
+        //         console.log("Égalité !");
+        //       break;
+        //       case 1: //Feuille
+        //         console.log("Perdu !");
+        //         $("#lose").text(++lose);
+        //       break;
+        //       case 2: //Ciseaux
+        //         console.log("Gagné !");
+        //         $("#win").text(++win);
+        //       break;
+        //     }
+        //   break;
+        //   // Dans le cas ou j'ai choisi Feuille
+        //   case "feuille":
+        //     // Dans le cas ou le bot choisi ...
+        //     switch (choixBot) {
+        //       case 0: //Pierre
+        //         console.log("Gagné !");
+        //         $("#win").text(++win);
+        //       break;
+        //       case 1: //Feuille
+        //         console.log("Égalité");
+        //       break;
+        //       case 2: //Ciseaux
+        //         console.log("Perdu !");
+        //         $("#lose").text(++lose);
+        //       break;
+        //     }
+        //   break;
+        //   // Dans le cas ou j'ai choisi Ciseaux
+        //   case "ciseaux":
+        //     // Dans le cas ou le bot choisi ...
+        //     switch (choixBot) {
+        //       case 0: //Pierre
+        //         console.log("Perdu !");
+        //         $("#lose").text(++lose);
+        //       break;
+        //       case 1: //Feuille
+        //         console.log("Gagné !");
+        //         $("#win").text(++win);
+        //       break;
+        //       case 2: //Ciseaux
+        //         console.log("Égalité !");
+        //       break;
+        //     }
+        //   break;
+        // }
+        // Si on gagne
+        if ( (choixPerso == "pierre" && choixBotName[choixBot] =="ciseaux") || (choixPerso == "feuille" && choixBotName[choixBot] =="pierre") || (choixPerso == "ciseaux" && choixBotName[choixBot] =="feuille"))
+        {
+          console.log("Gagné !");
+          $("#win").text(++win);
+          // Si les valeurs sont égales
+        } else if (choixPerso == choixBotName[choixBot]) {
+          console.log("Égalité !");
+          // Sinon on a perdu
+        } else {
+          console.log("Perdu !");
+          $("#lose").text(++lose);
         }
+
+        // Affichage du match (ton choix V.S choix du bot)
+        //
+        // Affiche en mode texte
+        $("#res").text(choixPerso+" vs "+choixBotName[choixBot]);
+        // Affichage en mode image
+        $('.ajout').remove();
+        $('#res').before('<img id="'+choixPerso+'P" class="ajout moi" src="img/'+choixPerso+'.png" />');
+        $('#res').before('<img id="'+choixBotName[choixBot]+'B" class="ajout bot" src="img/'+choixBotName[choixBot]+'.png" />');
+
+        $('.moi').animate({left: "+=600"}, 2000, function(){
+          $('.moi').fadeOut(1000, function(){$(this).remove()})
+        });
+
+        $('.bot').animate({right: "+=600"}, 2000, function(){
+          $('.bot').fadeOut(1000, function(){$(this).remove()})
+        });
+
+        // $('.bot').animate({right: "+=600"}, 2000);
+
         // On recalcule le win rate à la fin de chaque boucle (afin d'éviter un décalage) puis on l'affiche
         // Affichage du win rate seulement s'il y a des win ou lose (afin d'éviter le NaN)
         if (win != 0 || lose != 0) {

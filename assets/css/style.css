@@ -10,3 +10,20 @@
 {
   padding: 2em;
 }
+
+.moi
+{
+  position: absolute;
+  left: -200px;
+  top: 200px;
+  height: 200px;
+  width: 200px;
+}
+.bot
+{
+  position: absolute;
+  right: -200px;
+  top: 200px;
+  height: 200px;
+  width: 200px;
+}
